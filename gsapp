@@ -14,6 +14,23 @@ warn() {
   echo "${0##*/}: $*" >&2
 }
 
+operation_add() {
+  if [ $# -lt 2 ]; then
+    warn "usage: ${0##*/} add <name> <command>"
+    exit 2
+  fi
+  (
+    name="$1"
+    execute="$2"
+    cat <<__DESKTOP_FILE__ > "$HOME/.local/share/applications/$name.desktop"
+[Desktop Entry]
+Name=$name
+Exec=$execute
+Type=Application
+__DESKTOP_FILE__
+  )
+}
+
 if [ $# -lt 1 ]; then
   usage
   exit 2
@@ -22,18 +39,7 @@ operation="$1"
 shift
 case "$operation" in
   add)
-    if [ $# -lt 2 ]; then
-      warn "usage: ${0##*/} add <name> <command>"
-      exit 2
-    fi
-    name="$1"
-    execute="$2"
-    cat <<-__DESKTOP_FILE__ > "$HOME/.local/share/applications/$name.desktop"
-[Desktop Entry]
-Name=$name
-Exec=$execute
-Type=Application
-__DESKTOP_FILE__
+    operation_add "$@"
     ;;
   help)
     usage
