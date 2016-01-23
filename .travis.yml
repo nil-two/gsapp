@@ -1,0 +1,11 @@
+language: generic
+env:
+  global:
+    - export BATS_PATH=/tmp/bats
+    - export PATH="$BATS_PATH/bin:$PATH"
+
+before_install:
+  - git clone https://github.com/sstephenson/bats "$BATS_PATH"
+
+script:
+  - bats -t test
