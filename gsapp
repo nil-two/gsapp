@@ -34,6 +34,9 @@ __DESKTOP_FILE__
 }
 
 operation_list() {
+  if [ ! -d "$GSAPP_PATH" ]; then
+    exit 0
+  fi
   ls -- "$GSAPP_PATH" \
   | grep '.desktop$' \
   | sed 's/.desktop$//'
