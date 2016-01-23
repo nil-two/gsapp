@@ -6,6 +6,7 @@ usage() {
 usage: ${0##*/} <operation> [...]
 operations:
   ${0##*/} add <name> <command>   # add a new application
+  ${0##*/} list                   # list applications
   ${0##*/} help                   # show this help message
 __USAGE__
 }
@@ -31,6 +32,12 @@ __DESKTOP_FILE__
   )
 }
 
+operation_list() {
+  ls "$HOME/.local/share/applications" \
+  | grep '.desktop$' \
+  | sed 's/.desktop$//'
+}
+
 if [ $# -lt 1 ]; then
   usage
   exit 2
@@ -40,6 +47,9 @@ shift
 case "$operation" in
   add)
     operation_add "$@"
+    ;;
+  list)
+    operation_list "$@"
     ;;
   help)
     usage
