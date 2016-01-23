@@ -1,5 +1,6 @@
 #!/bin/sh
 set -eu
+GSAPP_PATH="${GSAPP_PATH:-$HOME/.local/share/applications}"
 
 usage() {
   cat <<__USAGE__ >&2
@@ -23,7 +24,7 @@ operation_add() {
   (
     name="$1"
     execute="$2"
-    cat <<__DESKTOP_FILE__ > "$HOME/.local/share/applications/$name.desktop"
+    cat <<__DESKTOP_FILE__ > "$GSAPP_PATH/$name.desktop"
 [Desktop Entry]
 Name=$name
 Exec=$execute
@@ -33,7 +34,7 @@ __DESKTOP_FILE__
 }
 
 operation_list() {
-  ls "$HOME/.local/share/applications" \
+  ls -- "$GSAPP_PATH" \
   | grep '.desktop$' \
   | sed 's/.desktop$//'
 }
