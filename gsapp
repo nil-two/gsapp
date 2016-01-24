@@ -29,6 +29,10 @@ operation_add() {
   (
     name="$1"
     execute="$2"
+    if [ -f "$GSAPP_PATH/$name.desktop" ]; then
+      echo "${0##*/} add: \"$GSAPP_PATH/$name.desktop\" has already exist" >&2
+      exit 1
+    fi
     cat <<__DESKTOP_FILE__ > "$GSAPP_PATH/$name.desktop"
 [Desktop Entry]
 Name=$name
