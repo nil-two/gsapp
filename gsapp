@@ -60,7 +60,7 @@ case "$operation" in
     exit 0
     ;;
   *)
-    warn "invalid operation '$1'"
+    warn "invalid operation '$operation'"
     exit 2
     ;;
 esac
