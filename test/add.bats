@@ -12,14 +12,14 @@ teardown() {
   rm -rf -- "$GSAPP_PATH"
 }
 
-@test "exit 2 if arguments is not enough" {
+@test "gsapp add: exit 2 if arguments is not enough" {
   local name='test0'
   run "$gsapp" add "$name"
   [[ $status == 2 ]]
   [[ ! -e "$GSAPP_PATH/$name.desktop" ]]
 }
 
-@test "add .desktop file" {
+@test "gsapp add: add .desktop file" {
   local name='test000'
   local execute='echo Hello'
   run "$gsapp" add "$name" "$execute"
@@ -27,7 +27,7 @@ teardown() {
   [[ -e "$GSAPP_PATH/$name.desktop" ]]
 }
 
-@test "add .desktop file which name is empty" {
+@test "gsapp add: add .desktop file which name is empty" {
   local name=''
   local execute='echo'
   run "$gsapp" add "$name" "$execute"

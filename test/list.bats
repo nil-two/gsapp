@@ -12,7 +12,7 @@ teardown() {
   rm -rf -- "$GSAPP_PATH"
 }
 
-@test "list files whose extension is .desktop" {
+@test "gsapp list: list files whose extension is .desktop" {
   local expect=(aaa bbb)
   touch "$GSAPP_PATH/aaa.desktop"
   touch "$GSAPP_PATH/bbb.desktop"
@@ -22,7 +22,7 @@ teardown() {
   [[ ${lines[@]} == ${expect[@]} ]]
 }
 
-@test "show nothing if \$GSAPP_PATH doesn't exist" {
+@test "gsapp list: show nothing if \$GSAPP_PATH doesn't exist" {
   local expect=()
   rm -rf -- "$GSAPP_PATH"
   run "$gsapp" list
