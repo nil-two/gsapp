@@ -42,3 +42,13 @@ teardown() {
   [[ $status == 0 ]]
   [[ -e "$GSAPP_PATH/.desktop" ]]
 }
+
+@test "gsapp add: exit 1 if .desktop file has already exist" {
+  local name='test0'
+  local execute='echo'
+  touch "$GSAPP_PATH/$name.desktop"
+  run "$gsapp" add "$name" "$execute"
+  [[ $status == 1 ]]
+  [[ -e "$GSAPP_PATH/$name.desktop" ]]
+  [[ -z "$(cat "$GSAPP_PATH/$name.desktop")" ]]
+}
