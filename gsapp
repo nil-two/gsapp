@@ -7,6 +7,7 @@ usage() {
 usage: ${0##*/} <operation> [...]
 operations:
   ${0##*/} add <name> <command>   # add a new application
+  ${0##*/} delete <name>          # Delete the specified application
   ${0##*/} list                   # list applications
   ${0##*/} help                   # show this help message
 __USAGE__
@@ -42,6 +43,25 @@ operation_list() {
   | sed 's/.desktop$//'
 }
 
+operation_delete() {
+  if [ $# -lt 1 ]; then
+    echo "usage: ${0##*/} delete <name>" >&2
+    exit 2
+  fi
+  if [ ! -d "$GSAPP_PATH" ]; then
+    echo "${0##*/} delete: \"$GSAPP_PATH\" doesn't exist" >&2
+    exit 2
+  fi
+  (
+    name="$1"
+    if [ ! -f "$GSAPP_PATH/$name.desktop" ]; then
+      echo "${0##*/} delete: \"$GSAPP_PATH/$name\" doesn't exist" >&2
+      exit 2
+    fi
+    rm -- "$GSAPP_PATH/$name.desktop"
+  )
+}
+
 if [ $# -lt 1 ]; then
   usage
   exit 2
@@ -51,6 +71,9 @@ shift
 case "$operation" in
   add)
     operation_add "$@"
+    ;;
+  delete)
+    operation_delete "$@"
     ;;
   list)
     operation_list "$@"
