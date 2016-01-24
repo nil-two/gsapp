@@ -19,6 +19,14 @@ teardown() {
   [[ ! -e "$GSAPP_PATH/$name.desktop" ]]
 }
 
+@test "gsapp add: exit 2 if \$GSAPP_PATH doesn't exist" {
+  local name='test0'
+  rm -rf -- "$GSAPP_PATH"
+  run "$gsapp" add "$name"
+  [[ $status == 2 ]]
+  [[ ! -e "$GSAPP_PATH/$name.desktop" ]]
+}
+
 @test "gsapp add: add .desktop file" {
   local name='test000'
   local execute='echo Hello'
