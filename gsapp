@@ -7,7 +7,7 @@ usage() {
 usage: ${0##*/} <operation> [...]
 operations:
   ${0##*/} add <name> <command>   # add a new application
-  ${0##*/} delete <name>          # Delete the specified application
+  ${0##*/} delete <name>          # delete the specified application
   ${0##*/} list                   # list applications
   ${0##*/} help                   # show this help message
 __USAGE__
