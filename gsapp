@@ -51,7 +51,7 @@ operation_delete() {
     name="$1"
     if [ ! -f "$GSAPP_PATH/$name.desktop" ]; then
       echo "${0##*/} delete: \"$GSAPP_PATH/$name\" doesn't exist" >&2
-      exit 2
+      exit 1
     fi
     rm -- "$GSAPP_PATH/$name.desktop"
   )

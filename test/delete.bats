@@ -23,9 +23,9 @@ teardown() {
   [[ $status == 2 ]]
 }
 
-@test "gsapp delete: exit 2 if the specified application doesn't exist" {
+@test "gsapp delete: exit 1 if the specified application doesn't exist" {
   run "$gsapp" delete name0
-  [[ $status == 2 ]]
+  [[ $status == 1 ]]
 }
 
 @test "gsapp delete: delete the specified application" {
