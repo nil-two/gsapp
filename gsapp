@@ -13,10 +13,6 @@ operations:
 __USAGE__
 }
 
-warn() {
-  echo "${0##*/}: $*" >&2
-}
-
 operation_add() {
   if [ $# -lt 2 ]; then
     echo "usage: ${0##*/} add <name> <command>" >&2
@@ -91,7 +87,7 @@ case "$operation" in
     exit 0
     ;;
   *)
-    warn "invalid operation '$operation'"
+    echo "${0##*/}: invalid operation '$operation'" >&2
     exit 2
     ;;
 esac
