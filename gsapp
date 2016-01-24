@@ -22,6 +22,10 @@ operation_add() {
     echo "usage: ${0##*/} add <name> <command>" >&2
     exit 2
   fi
+  if [ ! -d "$GSAPP_PATH" ]; then
+    echo "${0##*/} add: \"$GSAPP_PATH\" doesn't exist" >&2
+    exit 2
+  fi
   (
     name="$1"
     execute="$2"
