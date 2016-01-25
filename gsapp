@@ -25,11 +25,12 @@ operation_add() {
   (
     name="$1"
     execute="$2"
-    if [ -f "$GSAPP_PATH/$name.desktop" ]; then
-      echo "${0##*/} add: \"$GSAPP_PATH/$name.desktop\" has already exist" >&2
+    application="$GSAPP_PATH/$name.desktop"
+    if [ -f "$application" ]; then
+      echo "${0##*/} add: \"$application\" has already exist" >&2
       exit 1
     fi
-    cat <<__DESKTOP_FILE__ > "$GSAPP_PATH/$name.desktop"
+    cat <<__DESKTOP_FILE__ > "$application"
 [Desktop Entry]
 Name=$name
 Exec=$execute
@@ -49,11 +50,12 @@ operation_delete() {
   fi
   (
     name="$1"
-    if [ ! -f "$GSAPP_PATH/$name.desktop" ]; then
-      echo "${0##*/} delete: \"$GSAPP_PATH/$name\" doesn't exist" >&2
+    application="$GSAPP_PATH/$name.desktop"
+    if [ ! -f "$application" ]; then
+      echo "${0##*/} delete: \"$application\" doesn't exist" >&2
       exit 1
     fi
-    rm -- "$GSAPP_PATH/$name.desktop"
+    rm -- "$application"
   )
 }
 
