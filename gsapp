@@ -68,6 +68,10 @@ operation_list() {
   | sed 's/.desktop$//'
 }
 
+operation_help() {
+  usage
+}
+
 if [ $# -lt 1 ]; then
   usage
   exit 2
@@ -85,8 +89,7 @@ case "$operation" in
     operation_list "$@"
     ;;
   help)
-    usage
-    exit 0
+    operation_help "$@"
     ;;
   *)
     echo "${0##*/}: invalid operation '$operation'" >&2
