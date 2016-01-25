@@ -79,17 +79,9 @@ fi
 operation="$1"
 shift
 case "$operation" in
-  add)
-    operation_add "$@"
-    ;;
-  delete)
-    operation_delete "$@"
-    ;;
-  list)
-    operation_list "$@"
-    ;;
-  help)
-    operation_help "$@"
+  add|delete|list|help)
+    "operation_$operation" "$@"
+    exit 0
     ;;
   *)
     echo "${0##*/}: invalid operation '$operation'" >&2
