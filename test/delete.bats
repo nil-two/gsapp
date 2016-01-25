@@ -1,7 +1,7 @@
 #!/usr/bin/env bats
 
 readonly gsapp="$BATS_TEST_DIRNAME/../gsapp"
-readonly GSAPP_PATH="$BATS_TMPDIR/application"
+readonly GSAPP_PATH="$BATS_TMPDIR/applications"
 
 setup() {
   export GSAPP_PATH
