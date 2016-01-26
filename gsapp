@@ -1,5 +1,6 @@
 #!/bin/sh
 set -eu
+VERSION='0.1.0'
 GSAPP_PATH="${GSAPP_PATH:-$HOME/.local/share/applications}"
 
 usage() {
@@ -10,6 +11,7 @@ operations:
   ${0##*/} delete <name(s)>       # delete the specified applications
   ${0##*/} list                   # list applications
   ${0##*/} help                   # show this help message
+  ${0##*/} version                # print the version
 __USAGE__
 }
 
@@ -73,6 +75,10 @@ operation_help() {
   usage
 }
 
+operation_version() {
+  echo "$VERSION" >&2
+}
+
 if [ $# -lt 1 ]; then
   usage
   exit 2
@@ -80,7 +86,7 @@ fi
 operation="$1"
 shift
 case "$operation" in
-  add|delete|list|help)
+  add|delete|list|help|version)
     "operation_$operation" "$@"
     exit 0
     ;;
