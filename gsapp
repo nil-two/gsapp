@@ -7,7 +7,7 @@ usage() {
 usage: ${0##*/} <operation> [...]
 operations:
   ${0##*/} add <name> <command>   # add a new application
-  ${0##*/} delete <name>          # delete the specified application
+  ${0##*/} delete <name(s)>       # delete the specified applications
   ${0##*/} list                   # list applications
   ${0##*/} help                   # show this help message
 __USAGE__
@@ -49,13 +49,14 @@ operation_delete() {
     exit 2
   fi
   (
-    name="$1"
-    application="$GSAPP_PATH/$name.desktop"
-    if [ ! -f "$application" ]; then
-      echo "${0##*/} delete: \"$application\" doesn't exist" >&2
-      exit 1
-    fi
-    rm -- "$application"
+    for name in "$@"; do
+      application="$GSAPP_PATH/$name.desktop"
+      if [ ! -f "$application" ]; then
+        echo "${0##*/} delete: \"$application\" doesn't exist" >&2
+        exit 1
+      fi
+      rm -- "$application"
+    done
   )
 }
 
