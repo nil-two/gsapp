@@ -36,3 +36,12 @@ teardown() {
   [[ -f "$GSAPP_PATH/name0.desktop" ]]
   [[ ! -f "$GSAPP_PATH/name1.desktop" ]]
 }
+
+@test "gsapp delete: delete the specified applications" {
+  touch "$GSAPP_PATH/name0.desktop"
+  touch "$GSAPP_PATH/name1.desktop"
+  run "$gsapp" delete name0 name1
+  [[ $status == 0 ]]
+  [[ ! -f "$GSAPP_PATH/name0.desktop" ]]
+  [[ ! -f "$GSAPP_PATH/name1.desktop" ]]
+}
