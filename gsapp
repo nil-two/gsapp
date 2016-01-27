@@ -26,7 +26,8 @@ operation_add() {
   fi
   (
     name="$1"
-    execute="$2"
+    shift
+    execute="$*"
     application="$GSAPP_PATH/$name.desktop"
     if [ -f "$application" ]; then
       echo "${0##*/} add: \"$application\" has already exist" >&2
