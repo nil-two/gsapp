@@ -52,3 +52,19 @@ teardown() {
   [[ $status == 0 ]]
   [[ -e "$GSAPP_PATH/.desktop" ]]
 }
+
+@test "gsapp add: Use \$1 as Name, and use \${*:2} as Exec" {
+  local name='test0'
+  local execute='echo'
+  local args=('foo' 'bar  baz')
+  run "$gsapp" add "$name" "$execute" "${args[@]}"
+  [[ $status == 0 ]]
+  [[ -e "$GSAPP_PATH/$name.desktop" ]]
+
+  run cat "$GSAPP_PATH/$name.desktop"
+  [[ $status == 0 ]]
+  [[ ${lines[0]} == '[Desktop Entry]' ]]
+  [[ ${lines[1]} == "Name=$name" ]]
+  [[ ${lines[2]} == "Exec=$execute ${args[*]}" ]]
+  [[ ${lines[3]} == 'Type=Application' ]]
+}
