@@ -7,11 +7,11 @@ usage() {
   cat <<__USAGE__ >&2
 usage: ${0##*/} <operation> [...]
 operations:
-  ${0##*/} add <name> <command>   # add a new application
-  ${0##*/} delete <name(s)>       # delete the specified applications
-  ${0##*/} list                   # list applications
-  ${0##*/} help                   # show this help message
-  ${0##*/} version                # print the version
+  ${0##*/} add <name> <command> [arg(s)]  # add a new application
+  ${0##*/} delete <name(s)>               # delete applications
+  ${0##*/} list                           # list applications
+  ${0##*/} help                           # show this help message
+  ${0##*/} version                        # print the version
 __USAGE__
 }
 
