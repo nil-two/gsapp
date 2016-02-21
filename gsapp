@@ -6,6 +6,8 @@ GSAPP_PATH="${GSAPP_PATH:-$HOME/.local/share/applications}"
 usage() {
   cat <<__USAGE__ >&2
 usage: ${0##*/} <operation> [...]
+manege local applications in GNOME Shell.
+
 operations:
   ${0##*/} add <name> <command> [arg(s)]  # add a new application
   ${0##*/} delete <name(s)>               # delete applications

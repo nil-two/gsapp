@@ -10,6 +10,8 @@ Usage
 
 ```
 $ gsapp <operation> [...]
+manege local applications in GNOME Shell.
+
 operations:
   gsapp add <name> <command> [arg(s)]   # add a new application
   gsapp delete <name(s)>                # delete applications
