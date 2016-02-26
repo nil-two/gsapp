@@ -10,6 +10,7 @@ manege local applications in GNOME Shell.
 
 operations:
   ${0##*/} add <name> <command> [arg(s)]  # add a new application
+  ${0##*/} edit <name>                    # edit a application
   ${0##*/} delete <name(s)>               # delete applications
   ${0##*/} list                           # list applications
   ${0##*/} help                           # show this help message
