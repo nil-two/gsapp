@@ -44,6 +44,26 @@ __DESKTOP_FILE__
   )
 }
 
+gsapp_edit() {
+  if [ $# -lt 1 ]; then
+    echo "usage: ${0##*/} gsapp <name>" >&2
+    exit 2
+  fi
+  if [ ! -d "$GSAPP_PATH" ]; then
+    echo "${0##*/} edit: \"$GSAPP_PATH\" doesn't exist" >&2
+    exit 2
+  fi
+  (
+    name="$1"
+    application="$GSAPP_PATH/$name.desktop"
+    if [ ! -f "$application" ]; then
+      echo "${0##*/} edit: \"$application\" doesn't exist" >&2
+      exit 1
+    fi
+    ${EDITOR:-vi} "$application"
+  )
+}
+
 gsapp_delete() {
   if [ $# -lt 1 ]; then
     echo "usage: ${0##*/} delete <name>" >&2
@@ -89,7 +109,7 @@ fi
 operation="$1"
 shift
 case "$operation" in
-  add|delete|list|help|version)
+  add|edit|delete|list|help|version)
     "gsapp_$operation" "$@"
     exit 0
     ;;
