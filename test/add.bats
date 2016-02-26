@@ -12,27 +12,27 @@ teardown() {
   rm -rf -- "$GSAPP_PATH"
 }
 
-@test "gsapp add: exit 2 if arguments is not enough" {
+@test "gsapp add: exit non-zero if arguments is not enough" {
   local name='test0'
   run "$gsapp" add "$name"
-  [[ $status == 2 ]]
+  [[ $status != 0 ]]
   [[ ! -e "$GSAPP_PATH/$name.desktop" ]]
 }
 
-@test "gsapp add: exit 2 if \$GSAPP_PATH doesn't exist" {
+@test "gsapp add: exit non-zero if \$GSAPP_PATH doesn't exist" {
   local name='test0'
   rm -rf -- "$GSAPP_PATH"
   run "$gsapp" add "$name"
-  [[ $status == 2 ]]
+  [[ $status != 0 ]]
   [[ ! -e "$GSAPP_PATH/$name.desktop" ]]
 }
 
-@test "gsapp add: exit 1 if .desktop file has already exist" {
+@test "gsapp add: exit non-zero if .desktop file has already exist" {
   local name='test0'
   local execute='echo'
   touch "$GSAPP_PATH/$name.desktop"
   run "$gsapp" add "$name" "$execute"
-  [[ $status == 1 ]]
+  [[ $status != 0 ]]
   [[ -e "$GSAPP_PATH/$name.desktop" ]]
   [[ -z "$(cat "$GSAPP_PATH/$name.desktop")" ]]
 }

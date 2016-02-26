@@ -9,6 +9,6 @@ readonly gsapp="$BATS_TEST_DIRNAME/../gsapp"
 
 @test "gsapp: show usage if there is no arguments" {
   run "$gsapp"
-  [[ $status == 2 ]]
+  [[ $status != 0 ]]
   [[ ${lines[0]} =~ ^usage ]]
 }

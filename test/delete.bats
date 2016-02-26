@@ -12,20 +12,20 @@ teardown() {
   rm -rf -- "$GSAPP_PATH"
 }
 
-@test "gsapp delete: exit 2 if arguments is not enough" {
+@test "gsapp delete: exit non-zero if arguments is not enough" {
   run "$gsapp" delete
-  [[ $status == 2 ]]
+  [[ $status != 0 ]]
 }
 
-@test "gsapp delete: exit 2 if \$GSAPP_PATH doesn't exist" {
+@test "gsapp delete: exit non-zero if \$GSAPP_PATH doesn't exist" {
   rm -rf -- "$GSAPP_PATH"
   run "$gsapp" delete name0
-  [[ $status == 2 ]]
+  [[ $status != 0 ]]
 }
 
-@test "gsapp delete: exit 1 if the specified application doesn't exist" {
+@test "gsapp delete: exit non-zero if the specified application doesn't exist" {
   run "$gsapp" delete name0
-  [[ $status == 1 ]]
+  [[ $status != 0 ]]
 }
 
 @test "gsapp delete: delete the specified application" {

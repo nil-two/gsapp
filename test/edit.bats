@@ -12,20 +12,20 @@ teardown() {
   rm -rf -- "$GSAPP_PATH"
 }
 
-@test "gsapp edit: exit 2 if arguments is not enough" {
+@test "gsapp edit: exit non-zero if arguments is not enough" {
   run "$gsapp" edit
-  [[ $status == 2 ]]
+  [[ $status != 0 ]]
 }
 
-@test "gsapp edit: exit 2 if \$GSAPP_PATH doesn't exist" {
+@test "gsapp edit: exit non-zero if \$GSAPP_PATH doesn't exist" {
   rm -rf -- "$GSAPP_PATH"
   run "$gsapp" edit name
-  [[ $status == 2 ]]
+  [[ $status != 0 ]]
 }
 
-@test "gsapp edit: exit 1 if the specified application doesn't exist" {
+@test "gsapp edit: exit non-zero if the specified application doesn't exist" {
   run "$gsapp" edit name
-  [[ $status == 1 ]]
+  [[ $status != 0 ]]
 }
 
 @test "gsapp edit: edit the specified application with \$EDITOR" {
