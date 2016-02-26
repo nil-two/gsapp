@@ -13,58 +13,47 @@ teardown() {
 }
 
 @test "gsapp add: exit non-zero if arguments is not enough" {
-  local name='test0'
-  run "$gsapp" add "$name"
+  run "$gsapp" add app
   [[ $status != 0 ]]
-  [[ ! -e "$GSAPP_PATH/$name.desktop" ]]
+  [[ ! -e "$GSAPP_PATH/app.desktop" ]]
 }
 
 @test "gsapp add: exit non-zero if \$GSAPP_PATH doesn't exist" {
-  local name='test0'
   rm -rf -- "$GSAPP_PATH"
-  run "$gsapp" add "$name"
+  run "$gsapp" add app gnome-terminal
   [[ $status != 0 ]]
-  [[ ! -e "$GSAPP_PATH/$name.desktop" ]]
+  [[ ! -e "$GSAPP_PATH/app.desktop" ]]
 }
 
 @test "gsapp add: exit non-zero if .desktop file has already exist" {
-  local name='test0'
-  local execute='echo'
-  touch "$GSAPP_PATH/$name.desktop"
-  run "$gsapp" add "$name" "$execute"
+  touch "$GSAPP_PATH/app.desktop"
+  run "$gsapp" add app gnome-terminal
   [[ $status != 0 ]]
-  [[ -e "$GSAPP_PATH/$name.desktop" ]]
-  [[ -z "$(cat "$GSAPP_PATH/$name.desktop")" ]]
+  [[ -e "$GSAPP_PATH/app.desktop" ]]
+  [[ -z "$(cat "$GSAPP_PATH/app.desktop")" ]]
 }
 
 @test "gsapp add: add .desktop file" {
-  local name='test000'
-  local execute='echo Hello'
-  run "$gsapp" add "$name" "$execute"
+run "$gsapp" add app gnome-terminal
   [[ $status == 0 ]]
-  [[ -e "$GSAPP_PATH/$name.desktop" ]]
+  [[ -e "$GSAPP_PATH/app.desktop" ]]
 }
 
 @test "gsapp add: add .desktop file which name is empty" {
-  local name=''
-  local execute='echo'
-  run "$gsapp" add "$name" "$execute"
+  run "$gsapp" add '' gnome-terminal
   [[ $status == 0 ]]
   [[ -e "$GSAPP_PATH/.desktop" ]]
 }
 
 @test "gsapp add: Use \$1 as Name, and use \${*:2} as Exec" {
-  local name='test0'
-  local execute='echo'
-  local args=('foo' 'bar  baz')
-  run "$gsapp" add "$name" "$execute" "${args[@]}"
+  run "$gsapp" add app gnome-terminal -e '"vim \"java tea\""'
   [[ $status == 0 ]]
-  [[ -e "$GSAPP_PATH/$name.desktop" ]]
+  [[ -e "$GSAPP_PATH/app.desktop" ]]
 
-  run cat "$GSAPP_PATH/$name.desktop"
+  run cat "$GSAPP_PATH/app.desktop"
   [[ $status == 0 ]]
   [[ ${lines[0]} == '[Desktop Entry]' ]]
-  [[ ${lines[1]} == "Name=$name" ]]
-  [[ ${lines[2]} == "Exec=$execute ${args[*]}" ]]
+  [[ ${lines[1]} == 'Name=app' ]]
+  [[ ${lines[2]} == 'Exec=gnome-terminal -e "vim \"java tea\""' ]]
   [[ ${lines[3]} == 'Type=Application' ]]
 }

@@ -19,19 +19,19 @@ teardown() {
 
 @test "gsapp edit: exit non-zero if \$GSAPP_PATH doesn't exist" {
   rm -rf -- "$GSAPP_PATH"
-  run "$gsapp" edit name
+  run "$gsapp" edit app
   [[ $status != 0 ]]
 }
 
 @test "gsapp edit: exit non-zero if the specified application doesn't exist" {
-  run "$gsapp" edit name
+  run "$gsapp" edit app
   [[ $status != 0 ]]
 }
 
 @test "gsapp edit: edit the specified application with \$EDITOR" {
   export EDITOR="rm"
-  touch "$GSAPP_PATH/name.desktop"
-  run "$gsapp" edit name
+  touch "$GSAPP_PATH/app.desktop"
+  run "$gsapp" edit app
   [[ $status == 0 ]]
-  [[ ! -f "$GSAPP_PATH/name.desktop" ]]
+  [[ ! -f "$GSAPP_PATH/app.desktop" ]]
 }

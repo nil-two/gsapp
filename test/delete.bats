@@ -19,29 +19,29 @@ teardown() {
 
 @test "gsapp delete: exit non-zero if \$GSAPP_PATH doesn't exist" {
   rm -rf -- "$GSAPP_PATH"
-  run "$gsapp" delete name0
+  run "$gsapp" delete app
   [[ $status != 0 ]]
 }
 
 @test "gsapp delete: exit non-zero if the specified application doesn't exist" {
-  run "$gsapp" delete name0
+  run "$gsapp" delete app
   [[ $status != 0 ]]
 }
 
 @test "gsapp delete: delete the specified application" {
-  touch "$GSAPP_PATH/name0.desktop"
-  touch "$GSAPP_PATH/name1.desktop"
-  run "$gsapp" delete name1
+  touch "$GSAPP_PATH/app1.desktop"
+  touch "$GSAPP_PATH/app2.desktop"
+  run "$gsapp" delete app2
   [[ $status == 0 ]]
-  [[ -f "$GSAPP_PATH/name0.desktop" ]]
-  [[ ! -f "$GSAPP_PATH/name1.desktop" ]]
+  [[ -f "$GSAPP_PATH/app1.desktop" ]]
+  [[ ! -f "$GSAPP_PATH/app2.desktop" ]]
 }
 
 @test "gsapp delete: delete the specified applications" {
-  touch "$GSAPP_PATH/name0.desktop"
-  touch "$GSAPP_PATH/name1.desktop"
-  run "$gsapp" delete name0 name1
+  touch "$GSAPP_PATH/app1.desktop"
+  touch "$GSAPP_PATH/app2.desktop"
+  run "$gsapp" delete app1 app2
   [[ $status == 0 ]]
-  [[ ! -f "$GSAPP_PATH/name0.desktop" ]]
-  [[ ! -f "$GSAPP_PATH/name1.desktop" ]]
+  [[ ! -f "$GSAPP_PATH/app1.desktop" ]]
+  [[ ! -f "$GSAPP_PATH/app2.desktop" ]]
 }

@@ -13,19 +13,18 @@ teardown() {
 }
 
 @test "gsapp list: list files whose extension is .desktop" {
-  local expect=(aaa bbb)
   touch "$GSAPP_PATH/aaa.desktop"
   touch "$GSAPP_PATH/bbb.desktop"
   touch "$GSAPP_PATH/ccc.xml"
   run "$gsapp" list
   [[ $status == 0 ]]
-  [[ ${lines[@]} == ${expect[@]} ]]
+  [[ ${lines[0]} == aaa ]]
+  [[ ${lines[1]} == bbb ]]
 }
 
 @test "gsapp list: show nothing if \$GSAPP_PATH doesn't exist" {
-  local expect=()
   rm -rf -- "$GSAPP_PATH"
   run "$gsapp" list
   [[ $status == 0 ]]
-  [[ ${lines[@]} == ${expect[@]} ]]
+  [[ ${#lines[@]} == 0 ]]
 }
