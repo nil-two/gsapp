@@ -17,7 +17,7 @@ operations:
 __USAGE__
 }
 
-operation_add() {
+gsapp_add() {
   if [ $# -lt 2 ]; then
     echo "usage: ${0##*/} add <name> <command>" >&2
     exit 2
@@ -44,7 +44,7 @@ __DESKTOP_FILE__
   )
 }
 
-operation_delete() {
+gsapp_delete() {
   if [ $# -lt 1 ]; then
     echo "usage: ${0##*/} delete <name>" >&2
     exit 2
@@ -65,7 +65,7 @@ operation_delete() {
   )
 }
 
-operation_list() {
+gsapp_list() {
   if [ ! -d "$GSAPP_PATH" ]; then
     exit 0
   fi
@@ -74,11 +74,11 @@ operation_list() {
   | sed 's/.desktop$//'
 }
 
-operation_help() {
+gsapp_help() {
   usage
 }
 
-operation_version() {
+gsapp_version() {
   echo "$VERSION" >&2
 }
 
@@ -90,7 +90,7 @@ operation="$1"
 shift
 case "$operation" in
   add|delete|list|help|version)
-    "operation_$operation" "$@"
+    "gsapp_$operation" "$@"
     exit 0
     ;;
   *)
