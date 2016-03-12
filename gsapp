@@ -20,7 +20,7 @@ __USAGE__
 
 gsapp_add() {
   if [ $# -lt 2 ]; then
-    echo "usage: ${0##*/} add <name> <command>" >&2
+    echo "usage: ${0##*/} add <name> <command> [args(s)]" >&2
     exit 2
   fi
   if [ ! -d "$GSAPP_PATH" ]; then
