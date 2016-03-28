@@ -90,9 +90,14 @@ gsapp_list() {
   if [ ! -d "$GSAPP_PATH" ]; then
     exit 0
   fi
-  ls -- "$GSAPP_PATH" \
-  | grep '.desktop$' \
-  | sed 's/.desktop$//'
+  for path in "$GSAPP_PATH"/*; do
+    if [ "$path" = "${path%.desktop}" ]; then
+      continue
+    fi
+    path=${path##*/}
+    path=${path%.desktop}
+    printf "%s\n" "$path"
+  done
 }
 
 gsapp_help() {
