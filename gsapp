@@ -20,11 +20,11 @@ __USAGE__
 
 gsapp_add() {
   if [ $# -lt 2 ]; then
-    echo "usage: ${0##*/} add <name> <command> [args(s)]" >&2
+    printf "%s\n" "usage: ${0##*/} add <name> <command> [args(s)]" >&2
     exit 2
   fi
   if [ ! -d "$GSAPP_PATH" ]; then
-    echo "${0##*/} add: \"$GSAPP_PATH\" doesn't exist" >&2
+    printf "%s\n" "${0##*/} add: \"$GSAPP_PATH\" doesn't exist" >&2
     exit 2
   fi
   (
@@ -33,7 +33,7 @@ gsapp_add() {
     execute=$*
     application="$GSAPP_PATH/$name.desktop"
     if [ -f "$application" ]; then
-      echo "${0##*/} add: \"$application\" has already exist" >&2
+      printf "%s\n" "${0##*/} add: \"$application\" has already exist" >&2
       exit 1
     fi
     cat <<__DESKTOP_FILE__ > "$application"
@@ -47,18 +47,18 @@ __DESKTOP_FILE__
 
 gsapp_edit() {
   if [ $# -lt 1 ]; then
-    echo "usage: ${0##*/} gsapp <name>" >&2
+    printf "%s\n" "usage: ${0##*/} gsapp <name>" >&2
     exit 2
   fi
   if [ ! -d "$GSAPP_PATH" ]; then
-    echo "${0##*/} edit: \"$GSAPP_PATH\" doesn't exist" >&2
+    printf "%s\n" "${0##*/} edit: \"$GSAPP_PATH\" doesn't exist" >&2
     exit 2
   fi
   (
     name=$1
     application="$GSAPP_PATH/$name.desktop"
     if [ ! -f "$application" ]; then
-      echo "${0##*/} edit: \"$application\" doesn't exist" >&2
+      printf "%s\n" "${0##*/} edit: \"$application\" doesn't exist" >&2
       exit 1
     fi
     ${EDITOR:-vi} "$application"
@@ -67,18 +67,18 @@ gsapp_edit() {
 
 gsapp_delete() {
   if [ $# -lt 1 ]; then
-    echo "usage: ${0##*/} delete <name>" >&2
+    printf "%s\n" "usage: ${0##*/} delete <name>" >&2
     exit 2
   fi
   if [ ! -d "$GSAPP_PATH" ]; then
-    echo "${0##*/} delete: \"$GSAPP_PATH\" doesn't exist" >&2
+    printf "%s\n" "${0##*/} delete: \"$GSAPP_PATH\" doesn't exist" >&2
     exit 2
   fi
   (
     for name in "$@"; do
       application="$GSAPP_PATH/$name.desktop"
       if [ ! -f "$application" ]; then
-        echo "${0##*/} delete: \"$application\" doesn't exist" >&2
+        printf "%s\n" "${0##*/} delete: \"$application\" doesn't exist" >&2
         exit 1
       fi
       rm -- "$application"
@@ -105,7 +105,7 @@ gsapp_help() {
 }
 
 gsapp_version() {
-  echo "$VERSION" >&2
+  printf "%s\n" "$VERSION" >&2
 }
 
 if [ $# -lt 1 ]; then
@@ -120,7 +120,7 @@ case $operation in
     exit 0
     ;;
   *)
-    echo "${0##*/}: invalid operation '$operation'" >&2
+    printf "%s\n" "${0##*/}: invalid operation '$operation'" >&2
     exit 2
     ;;
 esac
