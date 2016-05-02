@@ -21,6 +21,19 @@ operations:
   gsapp version                         # print the version
 ```
 
+Installation
+------------
+
+gsapp is a simple shell script.
+
+The following instructions assume that `~/bin` is on your `$PATH`.
+If that is not the case, you can substitute your favorite location.
+
+```sh
+curl -L https://raw.githubusercontent.com/kusabashira/gsapp/master/gsapp > ~/bin/gsapp
+chmod 755 ~/bin/gsapp
+```
+
 License
 -------
 
