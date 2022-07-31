@@ -1,8 +1,6 @@
 gsapp
 =====
 
-[![Build Status](https://travis-ci.org/kusabashira/gsapp.svg?branch=master)](https://travis-ci.org/kusabashira/gsapp)
-
 Manege local applications in GNOME Shell
 
 Usage
@@ -30,7 +28,7 @@ The following instructions assume that `~/bin` is on your `$PATH`.
 If that is not the case, you can substitute your favorite location.
 
 ```sh
-curl -L https://raw.githubusercontent.com/kusabashira/gsapp/master/gsapp > ~/bin/gsapp
+curl -L https://raw.githubusercontent.com/nil2nekoni2/gsapp/master/gsapp > ~/bin/gsapp
 chmod 755 ~/bin/gsapp
 ```
 
@@ -42,4 +40,4 @@ MIT License
 Author
 ------
 
-kusabashira <kusabashira227@gmail.com>
+nil2 <nil2@nil2.org>
