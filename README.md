@@ -28,7 +28,7 @@ The following instructions assume that `~/bin` is on your `$PATH`.
 If that is not the case, you can substitute your favorite location.
 
 ```sh
-curl -L https://raw.githubusercontent.com/nil2nekoni2/gsapp/master/gsapp > ~/bin/gsapp
+curl -L https://raw.githubusercontent.com/nil-two/gsapp/master/gsapp > ~/bin/gsapp
 chmod 755 ~/bin/gsapp
 ```
 
